@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Graph</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+        h1{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'homepageview' %}" class="btn btn-primary">Back</a>
+    <h1 align="center">company: {{company}}</h1>
+    <canvas id="myChart" style="height: 75vh;"></canvas>
+    
+</body>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var values = [];
+    var dates = [];
+
+    {% for val in values %}
+        values.push('{{val}}');
+    {% endfor %}
+
+    {% for date in dates %}
+        dates.push('{{date}}');
+    {% endfor %}
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Stock Close Value',
+                data: values,
+                backgroundColor: [
+                    'blue',
+                ],
+                borderColor: [
+                    'blue',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    
+                }
+            }
+        }
+    });
+    </script>
+</html>
